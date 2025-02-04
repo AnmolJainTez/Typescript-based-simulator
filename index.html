@@ -7,7 +7,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.3/pixi.min.js"></script>
 </head>
 <body>
-    <script src="./load_track.js"></script>
     <script>
         window.onload = function() {
 
@@ -42,6 +41,26 @@
                 drawGridLines();
                 // addStraightTrack(app);
                 addImageAtOrigin(app);
+                fetch('./static/connections.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(trackConfig => {
+                        // Log the loaded track configuration to see what data was loaded
+                        console.log('Track configuration loaded:', trackConfig);
+
+                        // Once the JSON is loaded and parsed, set up the track
+                        setupTrack(app, trackConfig);
+                    })
+                    .catch(error => {
+                        console.error('Error loading the track configuration:', error);
+                        // Also log the error if there's a problem loading the file
+                        console.log('There was a problem with fetching the track configuration:', error.message);
+                    });
+
             }
 
             function drawGridLines() {
@@ -90,6 +109,7 @@
         }
     </script>
     <script src="./load_track.js"></script>
+    <script src="./pixi_script.js"></script>
     <!-- <script src="./static/pixi_script.js"></script> -->
 </body>
 </html>
