@@ -1,0 +1,202 @@
+{
+    "tracks": {
+        "items": [
+            {
+                "trackName": "track-1",
+                "trackUID": "UID of track-1",
+                "trackRangeMin": 0.0,
+                "trackRangeMax": 3892.29959,
+                "isModulo": true,
+                "direction": true,
+                "segments": {
+                    "items": [
+                        {
+                            "segmentName": "S1-M-Q1",
+                            "segmentDescription": "Description of S1-M-Q1",
+                            "segmentUID": "110ed82e-5d3d-4086-894d-c6044b4d3c20",
+                            "segmentSerialNr": "1234-000000001-AB",
+                            "segmentTypeCode": "FLOW-HS-S11-S750-NDNN-T0NNNN-N-SVSRSNN",
+                            "subSegments": {
+                                "items": [
+                                    {
+                                        "serialNr": "5678-000000001-AB",
+                                        "address": 1001,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 125.0,
+                                        "preannouncementOffset": 151.0
+                                    },
+                                    {
+                                        "serialNr": "5678-000000002-AB",
+                                        "address": 1005,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 375.0,
+                                        "preannouncementOffset": 151.0
+                                    },
+                                    {
+                                        "serialNr": "5678-000000003-AB",
+                                        "address": 1009,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 625.0,
+                                        "preannouncementOffset": 151.0
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "segmentName": "S4-M-Q1",
+                            "segmentDescription": "Description of S4-M-Q1",
+                            "segmentUID": "110ed82e-5d3d-4086-894d-c6044b4d3c23",
+                            "segmentSerialNr": "1234-000000002-AB",
+                            "segmentTypeCode": "FLOW-HS-S11-S250-NDNN-T0NNNN-N-SVSRSNN",
+                            "subSegments": {
+                                "items": [
+                                    {
+                                        "serialNr": "5678-000000004-AB",
+                                        "address": 1013,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 875.0,
+                                        "preannouncementOffset": 151.0
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "segmentName": "S5-M-Q1",
+                            "segmentDescription": "Description of S5-M-Q1",
+                            "segmentUID": "110ed82e-5d3d-4086-894d-c6044b4d3c24",
+                            "segmentSerialNr": "1234-000000003-AB",
+                            "segmentTypeCode": "FLOW-HS-S11-C180-NDNN-T0NNNN-N-SVSRSNN",
+                            "subSegments": {
+                                "items": [
+                                    {
+                                        "serialNr": "5678-000000005-AB",
+                                        "address": 1017,
+                                        "typeCode": "FLOW-HS-CNN-N-263",
+                                        "zeroPos": 1131.409,
+                                        "preannouncementOffset": 157.409
+                                    },
+                                    {
+                                        "serialNr": "5678-000000006-AB",
+                                        "address": 1021,
+                                        "typeCode": "FLOW-HS-CNN-N-210",
+                                        "zeroPos": 1367.946,
+                                        "preannouncementOffset": 131.127
+                                    },
+                                    {
+                                        "serialNr": "5678-000000007-AB",
+                                        "address": 1024,
+                                        "typeCode": "FLOW-HS-CNN-N-210",
+                                        "zeroPos": 1578.201,
+                                        "preannouncementOffset": 131.128
+                                    },
+                                    {
+                                        "serialNr": "5678-000000008-AB",
+                                        "address": 1027,
+                                        "typeCode": "FLOW-HS-CNN-N-263",
+                                        "zeroPos": 1814.739,
+                                        "preannouncementOffset": 157.409
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "segmentName": "S9-M-Q1",
+                            "segmentDescription": "Description of S9-M-Q1",
+                            "segmentUID": "110ed82e-5d3d-4086-894d-c6044b4d3c28",
+                            "segmentSerialNr": "1234-000000004-AB",
+                            "segmentTypeCode": "FLOW-HS-S11-S250-NDNN-T0NNNN-N-SVSRSNN",
+                            "subSegments": {
+                                "items": [
+                                    {
+                                        "serialNr": "5678-000000009-AB",
+                                        "address": 1031,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 2071.149,
+                                        "preannouncementOffset": 151.0
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "segmentName": "S10-M-Q1",
+                            "segmentDescription": "Description of S10-M-Q1",
+                            "segmentUID": "110ed82e-5d3d-4086-894d-c6044b4d3c29",
+                            "segmentSerialNr": "1234-000000005-AB",
+                            "segmentTypeCode": "FLOW-HS-S11-S750-NDNN-T0NNNN-N-SVSRSNN",
+                            "subSegments": {
+                                "items": [
+                                    {
+                                        "serialNr": "5678-0000000010-AB",
+                                        "address": 1035,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 2321.149,
+                                        "preannouncementOffset": 151.0
+                                    },
+                                    {
+                                        "serialNr": "5678-0000000011-AB",
+                                        "address": 1039,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 2571.149,
+                                        "preannouncementOffset": 151.0
+                                    },
+                                    {
+                                        "serialNr": "5678-0000000012-AB",
+                                        "address": 1043,
+                                        "typeCode": "FLOW-HS-SNN-N-250",
+                                        "zeroPos": 2821.149,
+                                        "preannouncementOffset": 151
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "segmentName": "S13-M-Q1",
+                            "segmentDescription": "Description of S13-M-Q1",
+                            "segmentUID": "110ed82e-5d3d-4086-894d-c6044b4d3c2c",
+                            "segmentSerialNr": "1234-000000006-AB",
+                            "segmentTypeCode": "FLOW-HS-S11-C180-NDNN-T0NNNN-N-SVSRSNN",
+                            "subSegments": {
+                                "items": [
+                                    {
+                                        "serialNr": "5678-0000000013-AB",
+                                        "address": 1047,
+                                        "typeCode": "FLOW-HS-CNN-N-263",
+                                        "zeroPos": 3077.558,
+                                        "preannouncementOffset": 157.409
+                                    },
+                                    {
+                                        "serialNr": "5678-0000000014-AB",
+                                        "address": 1051,
+                                        "typeCode": "FLOW-HS-CNN-N-210",
+                                        "zeroPos": 3314.096,
+                                        "preannouncementOffset": 131.128
+                                    },
+                                    {
+                                        "serialNr": "5678-0000000015-AB",
+                                        "address": 1054,
+                                        "typeCode": "FLOW-HS-CNN-N-210",
+                                        "zeroPos": 3524.352,
+                                        "preannouncementOffset": 131.124
+                                    },
+                                    {
+                                        "serialNr": "5678-0000000016-AB",
+                                        "address": 1057,
+                                        "typeCode": "FLOW-HS-CNN-N-263",
+                                        "zeroPos": 3760.889,
+                                        "preannouncementOffset": 157.410
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "mover": {
+        "moverLength": 40.0
+    },
+    "movers": {
+        "nrOfMovers": 3
+    }
+}
