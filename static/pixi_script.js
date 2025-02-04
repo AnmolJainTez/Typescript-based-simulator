@@ -1,53 +1,77 @@
+const trackConfig = {
+  initialPositionX: -500,
+  initialPositionY: 0,
+  radius: 225.0,
+  straightLength: 250.0,
+  connections: [
+      { from: "S1-M-Q1", to: "S2-M-Q1", type: "curved", radius: 225.0, direction: "northeast" },
+      { from: "S2-M-Q1", to: "S3-M-Q1", type: "straight", length: 250.0, direction: "east" },
+      { from: "S3-M-Q1", to: "S4-M-Q1", type: "straight", length: 250.0, direction: "east" },
+      { from: "S4-M-Q1", to: "S5-M-Q1", type: "curved", radius: 225.0, direction: "southeast" },
+      { from: "S5-M-Q1", to: "S6-M-Q1", type: "curved", radius: 225.0, direction: "southwest" },
+      { from: "S6-M-Q1", to: "S7-M-Q1", type: "straight", length: 250.0, direction: "west" },
+      { from: "S7-M-Q1", to: "S8-M-Q1", type: "straight", length: 250.0, direction: "west" },
+      { from: "S8-M-Q1", to: "S1-M-Q1", type: "curved", radius: 225.0, direction: "northwest" }
+  ]
+};
 
-const app = new PIXI.Application({ width: 800, height: 600, backgroundColor: 0x1099bb });
-document.body.appendChild(app.view);
+const container = document.getElementById('track-container');
+let posX = trackConfig.initialPositionX;
+let posY = trackConfig.initialPositionY;
 
-const trackContainer = new PIXI.Container();
-app.stage.addChild(trackContainer);
+trackConfig.connections.forEach((segment, index) => {
+  const img = document.createElement('img');
+  img.classList.add('track');
+  img.src = segment.type === 'curved' ? './../images/curved_250_200.png' : 'straight_250_50.jpg';
+  img.style.left = `${posX}px`;
+  img.style.top = `${posY}px`;
 
-function drawTrack(trackData) {
-    console.log("Drawing track...");
-    trackContainer.removeChildren();
-    const graphics = new PIXI.Graphics();
-    graphics.lineStyle(5, 0xffffff);
-    
-    let x = 400, y = 300;
-    let angle = 0;
-    graphics.moveTo(x, y);
+  // Adjusting the rotation based on direction
+  switch(segment.direction) {
+      case 'northeast':
+      case 'northwest':
+      case 'southeast':
+      case 'southwest':
+          img.style.transform = `rotate(${directionToAngle(segment.direction)}deg)`;
+          break;
+      case 'east':
+      case 'west':
+          img.style.transform = `rotate(${directionToAngle(segment.direction)}deg)`;
+          break;
+  }
 
-    trackData.track.connections.forEach(segment => {
-        console.log("Processing segment:", segment);
-        if (segment.type === "straight") {
-            x += Math.cos(angle) * segment.length;
-            y += Math.sin(angle) * segment.length;
-            graphics.lineTo(x, y);
-        } else if (segment.type === "curved") {
-            const curveRadius = segment.radius;
-            const arcCenterX = x + Math.cos(angle + Math.PI / 2) * curveRadius;
-            const arcCenterY = y + Math.sin(angle + Math.PI / 2) * curveRadius;
-            graphics.arc(arcCenterX, arcCenterY, curveRadius, angle, angle + Math.PI / 2);
-            angle += Math.PI / 2;
-            x = arcCenterX + Math.cos(angle) * curveRadius;
-            y = arcCenterY + Math.sin(angle) * curveRadius;
-        } else {
-            console.error("Unknown segment type:", segment.type);
-        }
-    });
-    
-    trackContainer.addChild(graphics);
+  container.appendChild(img);
+
+  // Calculate next position
+  switch(segment.direction) {
+      case 'east':
+          posX += segment.length;
+          break;
+      case 'west':
+          posX -= segment.length;
+          break;
+      case 'northeast':
+      case 'southeast':
+          posX += Math.cos(Math.PI / 4) * segment.radius; // Adjust calculation for curved
+          posY += Math.sin(Math.PI / 4) * segment.radius; // segments
+          break;
+      case 'northwest':
+      case 'southwest':
+          posX -= Math.cos(Math.PI / 4) * segment.radius;
+          posY -= Math.sin(Math.PI / 4) * segment.radius;
+          break;
+  }
+});
+
+function directionToAngle(direction) {
+  switch (direction) {
+      case 'east': return 0;
+      case 'northeast': return 45;
+      case 'southeast': return 135;
+      case 'south': return 180;
+      case 'southwest': return 225;
+      case 'west': return 270;
+      case 'northwest': return 315;
+      default: return 0;
+  }
 }
-
-async function loadTrackData() {
-    try {
-        console.log("Fetching track data...");
-        const response = await fetch('/static/connections.json');
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const data = await response.json();
-        console.log("Track data loaded:", data);
-        drawTrack(data);
-    } catch (error) {
-        console.error("Error loading track data:", error);
-    }
-}
-
-loadTrackData();

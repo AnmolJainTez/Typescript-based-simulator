@@ -1,43 +1,65 @@
 {
     "track": {
-        "radius": 50.0, 
-        "straightLength": 100.0,  
+        "initialPositionX": -500,
+        "initialPositionY": 0,
+        "radius": 225.0,
+        "straightLength": 250.0,
         "connections": [
             {
                 "from": "S1-M-Q1",
-                "to": "S4-M-Q1",
+                "to": "S2-M-Q1",
                 "type": "curved",
-                "radius": 50.0
+                "radius": 225.0,
+                "direction": "northeast"
+            },
+            {
+                "from": "S2-M-Q1",
+                "to": "S3-M-Q1",
+                "type": "straight",
+                "length": 250.0,
+                "direction": "east"
+            },
+            {
+                "from": "S3-M-Q1",
+                "to": "S4-M-Q1",
+                "type": "straight",
+                "length": 250.0,
+                "direction": "east"
             },
             {
                 "from": "S4-M-Q1",
                 "to": "S5-M-Q1",
-                "type": "straight",
-                "length": 100.0
+                "type": "curved",
+                "radius": 225.0,
+                "direction": "southeast"
             },
             {
                 "from": "S5-M-Q1",
-                "to": "S9-M-Q1",
+                "to": "S6-M-Q1",
                 "type": "curved",
-                "radius": 50.0
+                "radius": 225.0,
+                "direction": "southwest"
             },
             {
-                "from": "S9-M-Q1",
-                "to": "S10-M-Q1",
+                "from": "S6-M-Q1",
+                "to": "S7-M-Q1",
                 "type": "straight",
-                "length": 100.0
+                "length": 250.0,
+                "direction": "west"
             },
             {
-                "from": "S10-M-Q1",
-                "to": "S13-M-Q1",
-                "type": "curved",
-                "radius": 50.0
+                "from": "S7-M-Q1",
+                "to": "S8-M-Q1",
+                "type": "straight",
+                "length": 250.0,
+                "direction": "west"
             },
             {
-                "from": "S13-M-Q1",
+                "from": "S8-M-Q1",
                 "to": "S1-M-Q1",
                 "type": "curved",
-                "radius": 50.0
+                "radius": 225.0,
+                "direction": "northwest"
             }
         ]
     }

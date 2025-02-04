@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixiJS Example with Gridlines</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.3/pixi.min.js"></script>
+</head>
+<body>
+    <script src="./load_track.js"></script>
+    <script>
+        window.onload = function() {
+
+            // Initialize the PixiJS Application
+            let app = new PIXI.Application({
+                width: 1800, 
+                height: 1000, 
+                backgroundColor: 0x1099bb // Blue background color
+            });
+
+            // Append the view of the application to the HTML document body
+            document.body.appendChild(app.view);
+
+            // Load the background image
+            app.loader.add('background', './images/background.jpg').load(setup);
+
+            function setup() {
+                // Create the background sprite from the loaded image
+                let background = new PIXI.Sprite(app.loader.resources.background.texture);
+
+                // Set the anchor point to the center of the image
+                background.anchor.set(0.5);
+
+                // Position the background image at the center of the screen
+                background.x = app.screen.width / 2;
+                background.y = app.screen.height / 2;
+
+                // Add the background sprite to the stage
+                app.stage.addChild(background);
+
+                // Draw grid lines after adding the background
+                drawGridLines();
+                // addStraightTrack(app);
+                addImageAtOrigin(app);
+            }
+
+            function drawGridLines() {
+                const gridSpacing = 100;
+                const graphics = new PIXI.Graphics();
+
+                // Set line style for the grid
+                graphics.lineStyle(1, 0xFFFFFF, 0.5); // White lines with half opacity
+
+                // Drawing vertical grid lines
+                for (let x = 0; x <= app.screen.width; x += gridSpacing) {
+                    graphics.moveTo(x, 0);
+                    graphics.lineTo(x, app.screen.height);
+                }
+
+                // Drawing horizontal grid lines
+                for (let y = 0; y <= app.screen.height; y += gridSpacing) {
+                    graphics.moveTo(0, y);
+                    graphics.lineTo(app.screen.width, y);
+                }
+
+                const straightLength = 250;
+                const trackWidth = 50;
+                const curvedOuterRadius = 250;
+                const midRadius = 225;
+                const curvedInnerRadius = 200;
+
+
+
+                // Set the origin for grid lines
+                const originX = app.screen.width / 2;
+                const originY = app.screen.height / 2;
+
+                // Draw origin lines (more visible)
+                graphics.lineStyle(2, 0xFF0000, 1); // Red line for origin
+                graphics.moveTo(originX - 10, originY);
+                graphics.lineTo(originX + 10, originY);
+                graphics.moveTo(originX, originY - 10);
+                graphics.lineTo(originX, originY + 10);
+
+                // Add the grid graphics on top of the background
+                app.stage.addChild(graphics);
+                
+            }
+
+        }
+    </script>
+    <script src="./load_track.js"></script>
+    <!-- <script src="./static/pixi_script.js"></script> -->
+</body>
+</html>
