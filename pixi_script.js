@@ -1,57 +1,103 @@
 function setupTrack(app, trackConfig) {
-    let currentX = trackConfig.initialPositionX;
-    let currentY = trackConfig.initialPositionY;
+    console.log('Track configuration loaded:', trackConfig);
 
-    trackConfig.connections.forEach(segment => {
-        let imageFile;
-        let rotation = 0; // Default rotation in radians
+    let currentX = trackConfig.track.initialPositionX;
+    let currentY = trackConfig.track.initialPositionY;
+    console.log('Initial position:', currentX, currentY);
 
-        // Determine the image file and rotation based on the segment type and direction
+    // Preload all required images
+    let imagesToLoad = new Set();
+    trackConfig.track.connections.forEach(segment => {
         if (segment.type === "curved") {
-            imageFile = './images/curved_' + segment.radius + '.jpg';
-            switch (segment.direction) {
-                case 'northeast':
-                    rotation = 0; // Assuming 0 radians for northeast
-                    break;
-                case 'southeast':
-                    rotation = Math.PI / 2; // Rotate 90 degrees
-                    break;
-                case 'southwest':
-                    rotation = Math.PI; // Rotate 180 degrees
-                    break;
-                case 'northwest':
-                    rotation = 1.5 * Math.PI; // Rotate 270 degrees
-                    break;
-            }
+            imagesToLoad.add('./images/curved_250_200.png');
         } else if (segment.type === "straight") {
-            imageFile = './images/straight_' + segment.length + '.jpg';
-            if (segment.direction === 'east' || segment.direction === 'west') {
-                rotation = (segment.direction === 'east') ? 0 : Math.PI; // Rotate 180 degrees if west
-            }
+            imagesToLoad.add('./images/straight_250_50.jpg');
         }
+    });
 
-        // Load and position the image
-        addSegmentImage(app, imageFile, currentX, currentY, rotation);
-        
-        // Calculate the new position based on the direction and type
-        if (segment.type === "curved") {
-            // Just an example, actual calculation depends on how you want to position these
-            currentX += segment.radius * Math.cos(rotation);
-            currentY += segment.radius * Math.sin(rotation);
-        } else if (segment.type === "straight") {
-            currentX += segment.length * Math.cos(rotation);
-            currentY += segment.length * Math.sin(rotation);
-        }
+    // Convert set to an array and add to loader
+    imagesToLoad.forEach(imagePath => app.loader.add(imagePath));
+    console.log('Images to load:', imagesToLoad);
+
+    app.loader.load(() => {
+        trackConfig.track.connections.forEach(segment => {
+            let imageFile;
+            let rotation = 0; // Default rotation in radians
+
+            if (segment.type === "curved") {
+                imageFile = './images/curved_250_200.png';
+                switch (segment.direction) {
+                    case 'northeast':
+                        rotation = 0;
+                        break;
+                    case 'southeast':
+                        rotation = Math.PI / 2;
+                        break;
+                    case 'southwest':
+                        rotation = Math.PI;
+                        break;
+                    case 'northwest':
+                        rotation = 1.5 * Math.PI;
+                        break;
+                }
+            } else if (segment.type === "straight") {
+                imageFile = './images/straight_250_50.jpg';
+                if (segment.direction === 'east' || segment.direction === 'west') {
+                    rotation = 0;
+                }
+            }
+
+            if (segment.type === "curved" && segment.direction === "northeast") {
+                currentX += 100;
+                currentY -= 125;
+            } else if (segment.type === "straight" && segment.direction === "east") {
+                currentX += segment.length / 2;
+                currentY += 0;
+            } else if (segment.type === "straight" && segment.direction === "west") {
+                currentX -= segment.length / 2;
+                currentY += 0;
+            } else if (segment.type === "curved" && segment.direction === "southeast") {
+                currentX += 125;
+                currentY += 100;
+            } else if (segment.type === "curved" && segment.direction === "southwest") {
+                currentX -= 100;
+                currentY += 125;
+            } else if (segment.type === "curved" && segment.direction === "northwest") {
+                currentX -= 125;
+                currentY -= 100;
+            }
+
+            // Add preloaded image to stage
+            addSegmentImage(app, imageFile, currentX, currentY, rotation);
+
+            // // Calculate new position
+            if (segment.type === "curved" && segment.direction === "northeast") {
+                currentX += 125;
+                currentY -= 100;
+            } else if (segment.type === "straight" && segment.direction === "east") {
+                currentX += segment.length / 2;
+            } else if (segment.type === "straight" && segment.direction === "west") {
+                currentX -= segment.length / 2;
+            } else if (segment.type === "curved" && segment.direction === "southeast") {
+                currentX += 100;
+                currentY += 125;
+            } else if (segment.type === "curved" && segment.direction === "southwest") {
+                currentX -= 125;
+                currentY += 100;
+            } else if (segment.type === "curved" && segment.direction === "northwest") {
+                currentX -= 100;
+                currentY -= 125;
+            }
+        });
     });
 }
 
 function addSegmentImage(app, imagePath, posX, posY, rotation) {
-    app.loader.add(imagePath).load(() => {
-        let segmentImage = new PIXI.Sprite(app.loader.resources[imagePath].texture);
-        segmentImage.anchor.set(0.5);
-        segmentImage.x = posX;
-        segmentImage.y = posY;
-        segmentImage.rotation = rotation;
-        app.stage.addChild(segmentImage);
-    });
+    console.log('Adding image:', imagePath, posX, posY, rotation);
+    let segmentImage = new PIXI.Sprite(app.loader.resources[imagePath].texture);
+    segmentImage.anchor.set(0.5);
+    segmentImage.x = app.screen.width / 2 + posX;
+    segmentImage.y = app.screen.height / 2 +posY;
+    segmentImage.rotation = rotation;
+    app.stage.addChild(segmentImage);
 }
