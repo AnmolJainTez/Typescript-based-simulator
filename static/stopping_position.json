@@ -1,0 +1,48 @@
+{
+    "stoppingPositions": [
+        {
+            "stoppingPositionId": "SP1",
+            "connectionId": "S1-M-Q1",
+            "position_angle":  45,
+            "movers": [
+                { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M3", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M4", "action": "wait", "direction": "clockwise", "waittime": 1 }
+            ]
+        },
+        {
+            "stoppingPositionId": "SP2",
+            "connectionId": "S3-M-Q1",
+            "position": 100,
+            "movers": [
+                { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M3", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M4", "action": "wait", "direction": "clockwise", "waittime": 1 }
+            ]
+        },
+        {
+            "stoppingPositionId": "SP3",
+            "connectionId": "S5-M-Q1",
+            "position_angle": 45,
+            "movers": [
+                { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M3", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M4", "action": "wait", "direction": "clockwise", "waittime": 1 }
+            ]
+        },
+        {
+            "stoppingPositionId": "SP4",
+            "connectionId": "S7-M-Q1",
+            "position": 100,
+            "movers": [
+                { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M3", "action": "wait", "direction": "clockwise", "waittime": 1 },
+                { "moverId": "M4", "action": "wait", "direction": "clockwise", "waittime": 1 }
+            ]
+        }
+    ]
+}
