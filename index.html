@@ -61,6 +61,26 @@
                         console.log('There was a problem with fetching the track configuration:', error.message);
                     });
 
+                console.log('Track Data:', trackData); 
+                fetch('./static/stopping_position.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(stoppingPositions => {
+                        // Log the loaded track configuration to see what data was loaded
+                        console.log('stoppingPositions loaded:', stoppingPositions);
+
+                        // Once the JSON is loaded and parsed, set up the track
+                        addStoppingPositions(app, stoppingPositions);
+                    })
+                    .catch(error => {
+                        console.error('Error loading the stopping position configuration:', error);
+                    });
+                
+
             }
 
             function drawGridLines() {

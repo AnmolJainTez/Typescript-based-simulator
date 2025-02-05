@@ -1,3 +1,4 @@
+let trackData = [];
 function setupTrack(app, trackConfig) {
     console.log('Track configuration loaded:', trackConfig);
 
@@ -54,6 +55,16 @@ function setupTrack(app, trackConfig) {
                 currentX -= 125; currentY -= 100;
             }
 
+            trackData.push({
+                trackId: segment.from,
+                connectionFrom: segment.from,
+                connectionTo: segment.to,
+                imageFile: imageFile,
+                positionX: currentX,
+                positionY: currentY,
+                rotation: rotation
+            });
+
             // ✅ Pass `loader.resources` instead of `app.loader.resources`
             addSegmentImage(app, loader.resources, imageFile, currentX, currentY, rotation);
 
@@ -72,6 +83,7 @@ function setupTrack(app, trackConfig) {
                 currentX -= 100; currentY -= 125;
             }
         });
+        
     });
 }
 
