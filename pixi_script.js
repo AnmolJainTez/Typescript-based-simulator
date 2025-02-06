@@ -7,11 +7,22 @@ let trackData = {
     trackSegments: [] // Array to store all pushed current data
 };
 
+let trackCoordinateSystem = {
+    startX: 0,
+    startY: 0,
+    totalNrOfCoordinates: 0,
+    segmentCoordinates: []
+};
+let currentIdx = 0;
+
 
 function setupTrack(app, trackConfig) {
     console.log('Track configuration loaded:', trackConfig);
     trackData.originX = app.screen.width / 2;
     trackData.originY = app.screen.height / 2;
+
+    trackCoordinateSystem.startX = trackConfig.track.initialPositionX;
+    trackCoordinateSystem.startY = trackConfig.track.initialPositionY;
 
     let currentX = trackConfig.track.initialPositionX;
     let currentY = trackConfig.track.initialPositionY;
@@ -30,6 +41,7 @@ function setupTrack(app, trackConfig) {
 
     imagesToLoad.forEach(imagePath => loader.add(imagePath));
     console.log('Images to load:', imagesToLoad);
+
 
     loader.load(() => { // ✅ Using the correct loader
         trackConfig.track.connections.forEach(segment => {
@@ -67,14 +79,23 @@ function setupTrack(app, trackConfig) {
             }
 
             trackData.trackSegments.push({
-                trackId: segment.from,
-                connectionFrom: segment.from,
+                segmentId: segment.from,
                 connectionTo: segment.to,
                 imageFile: imageFile,
                 relativePositionX: currentX,
                 relativePositionY: currentY,
                 rotation: rotation
             });
+
+            trackCoordinateSystem.segmentCoordinates.push({
+                segmentId: segment.from,
+                connectionTo: segment.to,
+                coordinateStartIdx: currentIdx,
+                coordinateEndIdx: currentIdx + segment.nrOfCoordinates - 1
+            });
+
+            currentIdx += segment.nrOfCoordinates;
+            trackCoordinateSystem.totalNrOfCoordinates = currentIdx;
 
             // ✅ Pass `loader.resources` instead of `app.loader.resources`
             addSegmentImage(app, loader.resources, imageFile, currentX, currentY, rotation);
@@ -94,8 +115,8 @@ function setupTrack(app, trackConfig) {
                 currentX -= 100; currentY -= 125;
             }
         });
-        
     });
+    console.log(trackCoordinateSystem);
 }
 
 function addSegmentImage(app, resources, imagePath, posX, posY, rotation) {

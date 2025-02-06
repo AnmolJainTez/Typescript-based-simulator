@@ -10,56 +10,64 @@
                 "to": "S2-M-Q1",
                 "type": "curved",
                 "radius": 225.0,
-                "direction": "northeast"
+                "direction": "northeast",
+                "nrOfCoordinates": 500
             },
             {
                 "from": "S2-M-Q1",
                 "to": "S3-M-Q1",
                 "type": "straight",
                 "length": 250.0,
-                "direction": "east"
+                "direction": "east",
+                "nrOfCoordinates": 400
             },
             {
                 "from": "S3-M-Q1",
                 "to": "S4-M-Q1",
                 "type": "straight",
                 "length": 250.0,
-                "direction": "east"
+                "direction": "east",
+                "nrOfCoordinates": 400
             },
             {
                 "from": "S4-M-Q1",
                 "to": "S5-M-Q1",
                 "type": "curved",
                 "radius": 225.0,
-                "direction": "southeast"
+                "direction": "southeast",
+                "nrOfCoordinates": 500
             },
             {
                 "from": "S5-M-Q1",
                 "to": "S6-M-Q1",
                 "type": "curved",
                 "radius": 225.0,
-                "direction": "southwest"
+                "direction": "southwest",
+                "nrOfCoordinates": 500
             },
             {
                 "from": "S6-M-Q1",
                 "to": "S7-M-Q1",
                 "type": "straight",
                 "length": 250.0,
-                "direction": "west"
+                "direction": "west",
+                "nrOfCoordinates": 400
             },
             {
                 "from": "S7-M-Q1",
                 "to": "S8-M-Q1",
                 "type": "straight",
                 "length": 250.0,
-                "direction": "west"
+                "direction": "west",
+                "nrOfCoordinates": 400
             },
             {
                 "from": "S8-M-Q1",
                 "to": "S1-M-Q1",
                 "type": "curved",
                 "radius": 225.0,
-                "direction": "northwest"
+                "direction": "northwest",
+                "nrOfCoordinates": 500
             }
         ]
     }
