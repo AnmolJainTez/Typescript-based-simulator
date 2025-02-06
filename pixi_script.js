@@ -1,9 +1,17 @@
 // import { OutlineFilter } from 'pixi-filters';
 // import { OutlineFilter } from "@pixi/filter-outline";
 
-let trackData = [];
+let trackData = {
+    originX: 0 ,  // This will be updated dynamically
+    originY: 0 ,  // This will be updated dynamically
+    trackSegments: [] // Array to store all pushed current data
+};
+
+
 function setupTrack(app, trackConfig) {
     console.log('Track configuration loaded:', trackConfig);
+    trackData.originX = app.screen.width / 2;
+    trackData.originY = app.screen.height / 2;
 
     let currentX = trackConfig.track.initialPositionX;
     let currentY = trackConfig.track.initialPositionY;
@@ -58,13 +66,13 @@ function setupTrack(app, trackConfig) {
                 currentX -= 125; currentY -= 100;
             }
 
-            trackData.push({
+            trackData.trackSegments.push({
                 trackId: segment.from,
                 connectionFrom: segment.from,
                 connectionTo: segment.to,
                 imageFile: imageFile,
-                positionX: currentX,
-                positionY: currentY,
+                relativePositionX: currentX,
+                relativePositionY: currentY,
                 rotation: rotation
             });
 
@@ -97,9 +105,6 @@ function addSegmentImage(app, resources, imagePath, posX, posY, rotation) {
     segmentImage.x = app.screen.width / 2 + posX;
     segmentImage.y = app.screen.height / 2 + posY;
     segmentImage.rotation = rotation;
-    console.log("PIXI version:", PIXI.VERSION); // Check PIXI version
-    console.log("Available filters:", PIXI.filters); // Check if filters are available
-
     if (PIXI.filters && PIXI.filters.OutlineFilter) {
         let outlineFilter = new PIXI.filters.OutlineFilter(1, 0xff0000);
         segmentImage.filters = [outlineFilter];
