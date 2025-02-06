@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PixiJS Example with Gridlines</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.3/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-filters@4.1.1/dist/pixi-filters.js"></script>
+    <!-- <script src="pixi_script.js"></script> -->
+    <!-- <script src="pixi_script.js"></script>x -->
 </head>
 <body>
     <script>
@@ -40,7 +43,7 @@
                 // Draw grid lines after adding the background
                 drawGridLines();
                 // addStraightTrack(app);
-                addImageAtOrigin(app);
+                // addImageAtOrigin(app);
                 fetch('./static/connections.json')
                     .then(response => {
                         if (!response.ok) {

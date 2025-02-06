@@ -1,3 +1,6 @@
+// import { OutlineFilter } from 'pixi-filters';
+// import { OutlineFilter } from "@pixi/filter-outline";
+
 let trackData = [];
 function setupTrack(app, trackConfig) {
     console.log('Track configuration loaded:', trackConfig);
@@ -94,5 +97,15 @@ function addSegmentImage(app, resources, imagePath, posX, posY, rotation) {
     segmentImage.x = app.screen.width / 2 + posX;
     segmentImage.y = app.screen.height / 2 + posY;
     segmentImage.rotation = rotation;
+    console.log("PIXI version:", PIXI.VERSION); // Check PIXI version
+    console.log("Available filters:", PIXI.filters); // Check if filters are available
+
+    if (PIXI.filters && PIXI.filters.OutlineFilter) {
+        let outlineFilter = new PIXI.filters.OutlineFilter(1, 0xff0000);
+        segmentImage.filters = [outlineFilter];
+    } else {
+        console.error("OutlineFilter is not available. Check pixi-filters.js loading.");
+    }
+
     app.stage.addChild(segmentImage);
 }
