@@ -69,7 +69,7 @@
                     })
                     .then(trackConfig => {
                         // Log the loaded track configuration to see what data was loaded
-                        console.log('Track configuration loaded:', trackConfig);
+                        // console.log('Track configuration loaded:', trackConfig);
 
                         // Once the JSON is loaded and parsed, set up the track
                         setupTrack(app, trackConfig);
@@ -93,7 +93,7 @@
                         console.log('stoppingPositions loaded:', stoppingPositions);
 
                         // Once the JSON is loaded and parsed, set up the track
-                        addStoppingPositions(app, stoppingPositions);
+                        drawLinesForStoppingPositions(app, stoppingPositions);
                     })
                     .catch(error => {
                         console.error('Error loading the stopping position configuration:', error);
@@ -149,6 +149,7 @@
     </script>
     <script src="./load_track.js"></script>
     <script src="./pixi_script.js"></script>
+    <script src="./wrapper.js"></script>
     <!-- <script src="./static/pixi_script.js"></script> -->
 </body>
 </html>

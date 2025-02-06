@@ -3,7 +3,8 @@
         {
             "stoppingPositionId": "SP1",
             "connectionId": "S1-M-Q1",
-            "position_angle":  45,
+            "coordinateStartIdx": 100,
+            "coordinateEndIdx": 200,
             "movers": [
                 { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
                 { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
@@ -14,7 +15,8 @@
         {
             "stoppingPositionId": "SP2",
             "connectionId": "S3-M-Q1",
-            "position": 100,
+            "coordinateStartIdx": 900,
+            "coordinateEndIdx": 1000,
             "movers": [
                 { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
                 { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
@@ -25,7 +27,8 @@
         {
             "stoppingPositionId": "SP3",
             "connectionId": "S5-M-Q1",
-            "position_angle": 45,
+            "coordinateStartIdx": 2500,
+            "coordinateEndIdx": 2600,
             "movers": [
                 { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
                 { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
@@ -36,7 +39,8 @@
         {
             "stoppingPositionId": "SP4",
             "connectionId": "S7-M-Q1",
-            "position": 100,
+            "coordinateStartIdx": 2800,
+            "coordinateEndIdx": 2900,
             "movers": [
                 { "moverId": "M1", "action": "wait", "direction": "clockwise", "waittime": 1 },
                 { "moverId": "M2", "action": "wait", "direction": "clockwise", "waittime": 1 },
