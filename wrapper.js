@@ -28,15 +28,16 @@ function getCoordinateFromIndex(idxNumber, trackConfigDataInternal) {
         return null;
     }
 
-    console.log("Found segment data:", trackSegment);
+    // console.log("Found segment data:", trackSegment);    
     
     proportion = (idxNumber - segment.coordinateStartIdx) / (segment.coordinateEndIdx - segment.coordinateStartIdx);
-    console.log("Proportion:", proportion);
+    proportion_angle = proportion * 0.5 * Math.PI;
+    // console.log("Proportion:", proportion);
 
     s = extractSegmentData();
 
     let matchingSegment = s[trackSegment.segmentId] || null;
-    console.log("Matching segment:", matchingSegment);  
+    // console.log("Matching segment:", matchingSegment);  
     
     
     // Here you can define interpolation logic based on the segment type
@@ -45,7 +46,19 @@ function getCoordinateFromIndex(idxNumber, trackConfigDataInternal) {
     
     if (trackSegment.type === "curved") {
         // Adjust position based on direction
-        
+        if (matchingSegment.direction === "northeast") {
+            relativeX = relativeX + (125) - (225*Math.cos(proportion_angle));
+            relativeY = relativeY + (125) - (225*Math.sin(proportion_angle));
+        } else if (matchingSegment.direction === "southeast") {
+            relativeX = relativeX - (125) + (225*Math.sin(proportion_angle));
+            relativeY = relativeY + (125) - (225*Math.cos(proportion_angle));
+        } else if (matchingSegment.direction === "southwest") {
+            relativeX = relativeX - (125) + (225*Math.cos(proportion_angle));
+            relativeY = relativeY - (125) + (225*Math.sin(proportion_angle));
+        } else if (matchingSegment.direction === "northwest") {
+            relativeX = relativeX + (125) - (225*Math.cos(proportion_angle));
+            relativeY = relativeY - (125) + (225*Math.sin(proportion_angle));
+        } 
     } else if (trackSegment.type === "straight") {
         if (matchingSegment.direction === "east") {
             relativeX = relativeX - (125) + proportion * 250;
@@ -74,7 +87,24 @@ function drawLinesForStoppingPositions(app, stoppingPositions) {
         graphics_x.moveTo(startCoord.x, startCoord.y);
         graphics_x.lineTo(endCoord.x, endCoord.y);
         app.stage.addChild(graphics_x);
+
+        for (let i = 0; i < trackCoordinateSystem.totalNrOfCoordinates; i += 100) {
+            let dotCoord = getCoordinateFromIndex(i);
+            if (dotCoord) {
+                drawDot(app, dotCoord);
+            }
+        }
+
+        console.log('Loading track data...', trackCoordinateSystem.totalNrOfCoordinates);
+
     });  
 }
 
+function drawDot(app, coord) {
+    const dot = new PIXI.Graphics();
+    dot.beginFill(0x0000ff); // Red color
+    dot.drawCircle(coord.x, coord.y, 2); // Small circle (radius 5)
+    dot.endFill();
+    app.stage.addChild(dot);
+}
 
