@@ -31,11 +31,12 @@ function getCoordinateFromIndex(idxNumber, trackConfigDataInternal) {
     console.log("Found segment data:", trackSegment);
     
     proportion = (idxNumber - segment.coordinateStartIdx) / (segment.coordinateEndIdx - segment.coordinateStartIdx);
+    console.log("Proportion:", proportion);
 
-    // let matchingSegment = trackConfigDataInternal.track.connections.find(connection => 
-    //     connection.from === trackSegment.segmentId
-    // );
-    // console.log("Matching segment:", trackConfigDataInternal);   
+    s = extractSegmentData();
+
+    let matchingSegment = s[trackSegment.segmentId] || null;
+    console.log("Matching segment:", matchingSegment);  
     
     
     // Here you can define interpolation logic based on the segment type
@@ -46,12 +47,13 @@ function getCoordinateFromIndex(idxNumber, trackConfigDataInternal) {
         // Adjust position based on direction
         
     } else if (trackSegment.type === "straight") {
-        if (trackSegment.direction === "east") {
+        if (matchingSegment.direction === "east") {
             relativeX = relativeX - (125) + proportion * 250;
-        } else if (trackSegment.direction === "west") {
+        } else if (matchingSegment.direction === "west") {
             relativeX = relativeX + (125) - proportion * 250;
         }
     }
+
 
     return {
         x: relativeX + trackData.originX,
@@ -65,10 +67,14 @@ function drawLinesForStoppingPositions(app, stoppingPositions) {
         let startCoord = getCoordinateFromIndex(position.coordinateStartIdx);
         let endCoord = getCoordinateFromIndex(position.coordinateEndIdx);
         console.log("Drawing line between:", startCoord, endCoord);
-        
-        if (startCoord && endCoord) {
-            console.log(`Drawing line from (${startCoord.x}, ${startCoord.y}) to (${endCoord.x}, ${endCoord.y})`);
-            // Replace this with actual drawing logic using PIXI or canvas
-        }
-    });
+
+        const graphics_x = new PIXI.Graphics();
+        graphics_x.lineStyle(20, 0x000000, 1); // Red line with width 2
+
+        graphics_x.moveTo(startCoord.x, startCoord.y);
+        graphics_x.lineTo(endCoord.x, endCoord.y);
+        app.stage.addChild(graphics_x);
+    });  
 }
+
+

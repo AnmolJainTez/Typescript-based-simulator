@@ -172,11 +172,12 @@ function addSegmentImage(app, resources, imagePath, posX, posY, rotation) {
     // console.log('Adding image:', imagePath, posX, posY, rotation);
     let segmentImage = new PIXI.Sprite(resources[imagePath].texture); // ✅ Use correct resource reference
     segmentImage.anchor.set(0.5);
+    segmentImage.alpha = 0.5; // 50% transparent
     segmentImage.x = app.screen.width / 2 + posX;
     segmentImage.y = app.screen.height / 2 + posY;
     segmentImage.rotation = rotation;
     if (PIXI.filters && PIXI.filters.OutlineFilter) {
-        let outlineFilter = new PIXI.filters.OutlineFilter(1, 0xff0000);
+        let outlineFilter = new PIXI.filters.OutlineFilter(1, 0x0000ff);
         segmentImage.filters = [outlineFilter];
     } else {
         console.error("OutlineFilter is not available. Check pixi-filters.js loading.");
