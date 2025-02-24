@@ -98,6 +98,23 @@
                     .catch(error => {
                         console.error('Error loading the stopping position configuration:', error);
                     });
+                fetch('./static/mover.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(movers => {
+                        // Log the loaded track configuration to see what data was loaded
+                        console.log('movers loaded:', movers);
+
+                        // Once the JSON is loaded and parsed, set up the track
+                        drawPurpleBallsForMovers(app, movers);
+                    })
+                    .catch(error => {
+                        console.error('Error loading the stopping position configuration:', error);
+                    });
             }
 
             function drawGridLines() {

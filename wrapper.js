@@ -108,3 +108,19 @@ function drawDot(app, coord) {
     app.stage.addChild(dot);
 }
 
+function drawPurpleBallsForMovers(app, movers) {
+    movers.movers.forEach(mover => {
+        let coord = getCoordinateFromIndex(mover.startIndex);
+        if (coord) {
+            drawPurpleBall(app, coord);
+        }
+    });
+}
+
+function drawPurpleBall(app, coord) {
+    const ball = new PIXI.Graphics();
+    ball.beginFill(0x800080); // Purple color
+    ball.drawCircle(coord.x, coord.y, 10); // Circle with radius 10
+    ball.endFill();
+    app.stage.addChild(ball);
+}
